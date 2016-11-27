@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://192.168.64.2:3306/BANK_SERVICE" />
+        <property name="username" value="DIMA" />
+        <property name="password" value="DIMA" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="hibernate.cfg.xml" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" />
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="userDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="accountDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.AccountDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="walletDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.WalletDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="transactionDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.TransactionDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userService" class="ru.dimas.brosalin.ServiceImpl.UserServiceImpl">
+        <property name="userDAOImpl2" ref="userDAO" />
+    </bean>
+
+    <bean id="accountService" class="ru.dimas.brosalin.ServiceImpl.AccountServiceImpl">
+        <property name="accountDAOImplVer2" ref="accountDAO"/>
+    </bean>
+
+    <bean id="walletService" class="ru.dimas.brosalin.ServiceImpl.WalletServiceImpl">
+        <property name="walletDAOImplVer2" ref="walletDAO"/>
+    </bean>
+
+    <bean id="transactionService" class="ru.dimas.brosalin.ServiceImpl.TransactionServiceImpl">
+        <property name="transactionDAOImplVer2" ref="transactionDAO"/>
+    </bean>
+
+    <bean id="userModel" class="ru.dimas.brosalin.Models.User"/>
+    <bean id="accountModel" class="ru.dimas.brosalin.Models.Account"/>
+    <bean id="walletModel" class="ru.dimas.brosalin.Models.Wallet"/>
+    <bean id="transactionModel" class="ru.dimas.brosalin.Models.Transaction"/>
+    <bean id="yandexMailGun" class="ru.dimas.brosalin.Notification.SendMessageFromYandexAccount"/>
+
+
+    <bean id="loggerBean" class="ru.dimas.brosalin.Aspects.LoggerInfoAspect"/>
+    <bean id="notificationBean" class="ru.dimas.brosalin.Aspects.UserNotificationAspect"/>
+
+    <aop:aspectj-autoproxy/>
+    <aop:config proxy-target-class="true">
+        <aop:aspect ref="loggerBean">
+            <aop:pointcut id="performLogging" expression="execution (* ru.dimas.brosalin.DAO_VER_2.ModelDAOGlobal.save(..))"/>
+            <aop:before method="beforeSave" pointcut-ref="performLogging"/>
+            <aop:after method="afterSave" pointcut-ref="performLogging"/>
+        </aop:aspect>
+        <aop:aspect ref="notificationBean">
+            <aop:pointcut id="performNotification" expression="execution (* ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2.save(..))"/>
+            <aop:around method="InformUser" pointcut-ref="performNotification"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
