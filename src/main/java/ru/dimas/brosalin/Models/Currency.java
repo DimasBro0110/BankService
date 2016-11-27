@@ -1,5 +1,7 @@
 package ru.dimas.brosalin.Models;
 
+import com.google.gson.JsonObject;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -67,5 +69,13 @@ public class Currency implements Serializable {
 
     public void setKoeff(float koeff) {
         this.koeff = koeff;
+    }
+
+    public JsonObject toJson(){
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("CURRENCY_FROM_INFO", this.getCurrencyFromName());
+        jsonObject.addProperty("CURRENCY_TO_INFO", this.getCurrencyToName());
+        jsonObject.addProperty("CURRENCY_EXCHANGE_KOEFF", this.getKoeff());
+        return null;
     }
 }

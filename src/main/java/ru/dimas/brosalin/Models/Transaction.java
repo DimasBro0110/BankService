@@ -73,6 +73,13 @@ public class Transaction implements Serializable {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("TRANSACTION_ID", this.getTransactionID());
+        jsonObject.addProperty("MONEY", this.getTransactionMoney());
+        jsonObject.addProperty("TRANSACTION_TIME", this.getTransactionTime().toString());
+        jsonObject.add("ACCOUNT_TO_INFO", this.getAccountTo().toJson());
+        jsonObject.add("ACCOUNT_FROM_INFO", this.getAccountFrom().toJson());
+        jsonObject.add("LEGS_FROM_INFO", this.getLegsFrom().toJson());
+        jsonObject.add("LEGS_FROM_TO", this.getLegsTo().toJson());
+        jsonObject.add("CURRENCY_INFO", this.getCurrency().toJson());
         return jsonObject;
 
     }

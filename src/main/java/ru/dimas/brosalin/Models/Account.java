@@ -1,5 +1,6 @@
 package ru.dimas.brosalin.Models;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.hibernate.*;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
+import org.aspectj.lang.annotation.Aspect;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -75,10 +77,7 @@ public class Account implements Serializable {
     @Override
     public String toString(){
 
-        return "Account:{"
-                + "\nCreation:" + getAccountCreation()
-                + "\nUser:" + getUser()
-                + "\n}";
+        return toJson().toString();
 
     }
 
@@ -102,7 +101,16 @@ public class Account implements Serializable {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("ACCOUNT_ID", this.getAccountID());
-        jsonObject.addProperty("Creation", this.getAccountCreation().toString());
+        jsonObject.addProperty("CREATION", this.getAccountCreation().toString());
+        JsonArray walletArray = new JsonArray();
+        for(Wallet wall: wallet){
+            walletArray.add(wall.toJson());
+        }
+        JsonArray accTransactionsTo = new JsonArray();
+        for(Transaction transaction: accountTransactionsTo){
+            accTransactionsTo.add(transaction.toJson());
+        }
+        jsonObject.add("WALLET", walletArray);
         return jsonObject;
 
     }

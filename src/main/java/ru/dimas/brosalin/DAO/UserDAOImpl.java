@@ -21,6 +21,13 @@ public class UserDAOImpl implements ModelUserDAO {
 
     }
 
+    public UserDAOImpl(){
+
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void save(User user) {

@@ -122,14 +122,12 @@ public class User implements Serializable{
     @Override
     public String toString(){
 
-        return "User:{"
-                + "\nFirstName:" + getUserFirstName()
+        return "FirstName:" + getUserFirstName()
                 + "\nLastName:" + getUserLastName()
                 + "\nAge:" + getAge()
                 + "\nGender:" + getGender()
                 + "\nEmail:" + getEmail()
-                + "\nPassword:" + getPassword()
-                + "\n}";
+                + "\nPassword:" + getPassword();
 
     }
 
