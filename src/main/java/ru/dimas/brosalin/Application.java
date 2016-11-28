@@ -27,17 +27,10 @@ public class Application {
         user_1.setUserId(1);
 
         UserServiceImpl userDAOImpl2 = (UserServiceImpl) context.getBean("userService");
-//        userDAOImpl2.saveEntity(user_1);
         User user_test = userDAOImpl2.getUserByEmail("dima0294@yandex.ru");
 
         System.out.println(user_test.toJson());
 
-//        Account account = (Account) context.getBean("accountModel");
-//        account.setAccountCreation(new Timestamp(System.currentTimeMillis()));
-//        account.setUser(user_1);
-//
-//        AccountServiceImpl accountService = (AccountServiceImpl) context.getBean("accountService");
-//        accountService.saveEntity(account);
 
     }
 
