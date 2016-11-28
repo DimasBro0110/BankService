@@ -24,7 +24,7 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
     @Override
     public Object getModelById(int id) {
         try {
-            List<User> userListByID = (ArrayList<User>) getHibernateTemplate()
+            List<User> userListByID = (List<User>) getHibernateTemplate()
                     .find("from User where userId=?", id);
             return userListByID.get(0);
         }catch(Exception ex){
@@ -33,9 +33,9 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         }
     }
 
-    public Object getModelByNameAndLastName(String name, String lastName){
+    public User getModelByNameAndLastName(String name, String lastName){
         try {
-            List<User> userListByNameAndLastName = (ArrayList<User>) getHibernateTemplate()
+            List<User> userListByNameAndLastName = (List<User>) getHibernateTemplate()
                     .find("from User where userFirstName=? and userLastName=?",
                             name, lastName);
             return userListByNameAndLastName.get(0);
@@ -45,24 +45,9 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         }
     }
 
-    public Object getAccountFromUserByEmail(String email){
+    public User getModelByEmail(String email){
         try {
-            List<Account> accountByUserEmail = (ArrayList<Account>)getHibernateTemplate()
-                    .find("select user.account from User user where user.email=?", email);
-            if(accountByUserEmail.size() > 0) {
-                return accountByUserEmail.get(0);
-            }else{
-                return null;
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public Object getModelByEmail(String email){
-        try {
-            List<User> userListByEmail = (ArrayList<User>) getHibernateTemplate()
+            List<User> userListByEmail = (List<User>) getHibernateTemplate()
                     .find("from User u where u.email=?", email);
             return userListByEmail.get(0);
         }catch (Exception ex){
@@ -71,27 +56,12 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         }
     }
 
-    public Object getModelByPhoneNumber(String phoneNumber){
+    public User getModelByPhoneNumber(String phoneNumber){
         try {
-            List<User> userListByPhone = (ArrayList<User>)getHibernateTemplate()
+            List<User> userListByPhone = (List<User>)getHibernateTemplate()
                     .find("from User u where u.userPhoneNumber=?", phoneNumber);
             return userListByPhone.get(0);
         }catch(Exception ex){
-            ex.printStackTrace();
-            return null;
-        }
-    }
-
-    public Object getWalletByPhoneNumber(String phoneNumber){
-        try{
-            List<Wallet> walletListByPhone = (ArrayList<Wallet>)getHibernateTemplate()
-                    .find("select account.wallet from User u inner join u.account as account where u.userPhoneNumber=?", phoneNumber);
-            if(walletListByPhone.size() > 0) {
-                return walletListByPhone.get(0);
-            }else {
-                return null;
-            }
-        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }

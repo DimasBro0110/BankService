@@ -1,5 +1,6 @@
 package ru.dimas.brosalin.ServiceImpl;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.dimas.brosalin.DAO_IMPL.LegsToDAOImpl_VER_2;
 import ru.dimas.brosalin.Models.LegsTo;
 import ru.dimas.brosalin.Services.LegsToService;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 /**
  * Created by DmitriyBrosalin on 28/11/2016.
  */
+
+@Transactional
 public class LegsToServiceImpl implements LegsToService {
     private LegsToDAOImpl_VER_2 legsToDAOImplVer2;
 

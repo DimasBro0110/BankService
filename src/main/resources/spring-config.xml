@@ -43,6 +43,14 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="legsToDAO" class="ru.dimas.brosalin.DAO_IMPL.LegsToDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="legsFromDAO" class="ru.dimas.brosalin.DAO_IMPL.LegsFromDAOImpl_VER_2">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
     <bean id="userService" class="ru.dimas.brosalin.ServiceImpl.UserServiceImpl">
         <property name="userDAOImpl2" ref="userDAO" />
     </bean>
@@ -59,12 +67,21 @@
         <property name="transactionDAOImplVer2" ref="transactionDAO"/>
     </bean>
 
+    <bean id="legsToService" class="ru.dimas.brosalin.ServiceImpl.LegsToServiceImpl">
+        <property name="legsToDAOImplVer2" ref="legsToDAO"/>
+    </bean>
+
+    <bean id="legsFromService" class="ru.dimas.brosalin.ServiceImpl.LegsFromServiceImpl">
+        <property name="legsFromDAOImplVer2" ref="legsFromDAO"/>
+    </bean>
+
     <bean id="userModel" class="ru.dimas.brosalin.Models.User"/>
     <bean id="accountModel" class="ru.dimas.brosalin.Models.Account"/>
     <bean id="walletModel" class="ru.dimas.brosalin.Models.Wallet"/>
     <bean id="transactionModel" class="ru.dimas.brosalin.Models.Transaction"/>
     <bean id="yandexMailGun" class="ru.dimas.brosalin.Notification.SendMessageFromYandexAccount"/>
-
+    <bean id="legsToModel" class="ru.dimas.brosalin.Models.LegsTo"/>
+    <bean id="legsFromModel" class="ru.dimas.brosalin.Models.LegsFrom"/>
 
     <bean id="loggerBean" class="ru.dimas.brosalin.Aspects.LoggerInfoAspect"/>
     <bean id="notificationBean" class="ru.dimas.brosalin.Aspects.UserNotificationAspect"/>

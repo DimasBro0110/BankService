@@ -33,29 +33,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getModelByNameAndLastName(String name, String lastName) {
-        User user = (User)this.userDAOImpl2.getModelByNameAndLastName(name, lastName);
-        return user;
+    public User getUserByNameAndLastName(String name, String lastName) {
+        return this.userDAOImpl2.getModelByNameAndLastName(name, lastName);
     }
 
     @Override
-    public User getModelByEmail(String email) {
-        User user = (User) this.userDAOImpl2.getModelByEmail(email);
-        return user;
+    public User getUserByEmail(String email) {
+        return this.userDAOImpl2.getModelByEmail(email);
     }
 
     @Override
-    public Account getAccountByUserEmail(String email) {
-        Account account = (Account) this.userDAOImpl2.getAccountFromUserByEmail(email);
-        return account;
+    public User getUserByPhone(String phone) {
+        return this.userDAOImpl2.getModelByPhoneNumber(phone);
     }
-
-    @Override
-    public Wallet getWalletFromUserByPhoneNumber(String phone) {
-        Wallet wallet = (Wallet) this.userDAOImpl2.getWalletByPhoneNumber(phone);
-        return wallet;
-    }
-
 
     public void setUserDAOImpl2(UserDAOImpl_VER_2 userDAOImpl2) {
         this.userDAOImpl2 = userDAOImpl2;

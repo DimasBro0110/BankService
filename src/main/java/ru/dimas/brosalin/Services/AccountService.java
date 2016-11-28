@@ -14,8 +14,8 @@ import java.util.List;
 public interface AccountService {
     void saveEntity(Account account);
     void update(Account account);
-    Account getAccountById(int id);
-    ArrayList<Transaction> getAccountTransactionsTo(int id);
-    ArrayList<Transaction> getAccountTransactionsFrom(int id);
-    Wallet getWalletFromAccountById(int id);
+    Account getAccountByUserFirstLastName(String firstName, String lastName);
+    Account getAccountByUserEmail(String email);
+    Account getAccountByUserPhone(String phone);
+    Account getAccountByUserId(int id);
 }

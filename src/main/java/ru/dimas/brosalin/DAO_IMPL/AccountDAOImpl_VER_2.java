@@ -34,47 +34,53 @@ public class AccountDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDA
         }
     }
 
-    public List<Transaction> getAccountTransactionsToById(int id){
+    public Account getAccountByUserFirstLastName(String firstName, String lastName){
         try{
-            List<Transaction> transactionList = (ArrayList<Transaction>)getHibernateTemplate()
-                    .find("select ac.accountTransactionsTo from Account ac where ac.accountID=?", id);
-            return transactionList;
-        }catch(Exception ex){
+            List<Account> accountList = (List<Account>)getHibernateTemplate()
+                    .find("from Account acc join " +
+                            "acc.user usr where " +
+                            "usr.userFirstName=? and usr.userLastName=?", firstName, lastName);
+            return accountList.get(0);
+        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }
     }
 
-    public List<Transaction> getAccountTransactionsFromById(int id){
+    public Account getAccountByUserEmail(String email){
         try{
-            List<Transaction> transactionList = (ArrayList<Transaction>)getHibernateTemplate()
-                    .find("select ac.accountTransactionsFrom from Account ac where ac.accountID=?", id);
-            return transactionList;
-        }catch(Exception ex){
+            List<Account> accountList = (List<Account>)getHibernateTemplate()
+                    .find("from Account acc join " +
+                            "acc.user usr where " +
+                            "usr.email=?", email);
+            return accountList.get(0);
+        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }
     }
 
-    public Wallet getWalletFromAccountById(int id){
+    public Account getAccountByUserPhone(String phone){
         try{
-            List<Wallet> walletListById = (ArrayList<Wallet>)getHibernateTemplate()
-                    .find("select acc.wallet from Account acc where acc.accountID=?", id);
-            return walletListById.get(0);
-        }catch(Exception ex) {
+            List<Account> accountList = (List<Account>)getHibernateTemplate()
+                    .find("from Account acc join " +
+                            "acc.user usr where " +
+                            "usr.userPhoneNumber=?", phone);
+            return accountList.get(0);
+        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }
     }
 
-    public List<Object[]> getDetailedTransactionsFromByID(int id){
-        try {
-            List<Object[]> detailedTransactionFromList = (ArrayList<Object[]>)getHibernateTemplate()
-                    .find(
-                            "select ac.accountTransactionsFrom, lf from Account ac " +
-                            "inner join fetch LegsFrom as lf where ac.accountID=?", id);
-            return detailedTransactionFromList;
-        }catch(Exception ex){
+    public Account getAccountByUserId(int id){
+        try{
+            List<Account> accountList = (List<Account>)getHibernateTemplate()
+                    .find("from Account acc join " +
+                            "acc.user usr where " +
+                            "usr.id=?", id);
+            return accountList.get(0);
+        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }

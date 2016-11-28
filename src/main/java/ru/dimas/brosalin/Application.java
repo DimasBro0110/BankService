@@ -4,27 +4,12 @@
 
 package ru.dimas.brosalin;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import org.apache.coyote.http2.Stream;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.dimas.brosalin.DAO.*;
-import ru.dimas.brosalin.Models.*;
-import ru.dimas.brosalin.Notification.SendMessageFromYandexAccount;
-import ru.dimas.brosalin.ServiceImpl.AccountServiceImpl;
+import ru.dimas.brosalin.Models.User;
 import ru.dimas.brosalin.ServiceImpl.UserServiceImpl;
-import ru.dimas.brosalin.Session.SessionManagment;
-
-import java.sql.Timestamp;
 
 // justbank
-
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
 
 public class Application {
 
@@ -43,11 +28,9 @@ public class Application {
 
         UserServiceImpl userDAOImpl2 = (UserServiceImpl) context.getBean("userService");
 //        userDAOImpl2.saveEntity(user_1);
-        Account accountTest = userDAOImpl2.getAccountByUserEmail("dima0294@yandex.ru");
-        Wallet wallet = userDAOImpl2.getWalletFromUserByPhoneNumber("+79851730921");
+        User user_test = userDAOImpl2.getUserByEmail("dima0294@yandex.ru");
 
-        System.out.println(wallet);
-        System.out.println(accountTest.toJson());
+        System.out.println(user_test.toJson());
 
 //        Account account = (Account) context.getBean("accountModel");
 //        account.setAccountCreation(new Timestamp(System.currentTimeMillis()));

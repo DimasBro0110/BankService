@@ -13,8 +13,7 @@ public interface UserService {
     void saveEntity(User user);
     User getUserById(int id);
     void update(User user);
-    User getModelByNameAndLastName(String name, String lastName);
-    User getModelByEmail(String email);
-    Account getAccountByUserEmail(String email);
-    Wallet getWalletFromUserByPhoneNumber(String phone);
+    User getUserByNameAndLastName(String name, String lastName);
+    User getUserByEmail(String email);
+    User getUserByPhone(String phone);
 }
