@@ -27,19 +27,19 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <bean id="userDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2">
+    <bean id="userDAO" class="ru.dimas.brosalin.DAO_IMPL.UserDAOImpl_VER_2">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <bean id="accountDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.AccountDAOImpl_VER_2">
+    <bean id="accountDAO" class="ru.dimas.brosalin.DAO_IMPL.AccountDAOImpl_VER_2">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <bean id="walletDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.WalletDAOImpl_VER_2">
+    <bean id="walletDAO" class="ru.dimas.brosalin.DAO_IMPL.WalletDAOImpl_VER_2">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="transactionDAO" class="ru.dimas.brosalin.DAO_VER_2_IMPL.TransactionDAOImpl_VER_2">
+    <bean id="transactionDAO" class="ru.dimas.brosalin.DAO_IMPL.TransactionDAOImpl_VER_2">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -72,12 +72,12 @@
     <aop:aspectj-autoproxy/>
     <aop:config proxy-target-class="true">
         <aop:aspect ref="loggerBean">
-            <aop:pointcut id="performLogging" expression="execution (* ru.dimas.brosalin.DAO_VER_2.ModelDAOGlobal.save(..))"/>
+            <aop:pointcut id="performLogging" expression="execution (* ru.dimas.brosalin.DAO.ModelDAOGlobal.save(..))"/>
             <aop:before method="beforeSave" pointcut-ref="performLogging"/>
             <aop:after method="afterSave" pointcut-ref="performLogging"/>
         </aop:aspect>
         <aop:aspect ref="notificationBean">
-            <aop:pointcut id="performNotification" expression="execution (* ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2.save(..))"/>
+            <aop:pointcut id="performNotification" expression="execution (* ru.dimas.brosalin.DAO_IMPL.UserDAOImpl_VER_2.save(..))"/>
             <aop:around method="InformUser" pointcut-ref="performNotification"/>
         </aop:aspect>
     </aop:config>

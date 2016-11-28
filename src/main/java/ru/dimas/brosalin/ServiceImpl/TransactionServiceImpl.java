@@ -1,8 +1,7 @@
 package ru.dimas.brosalin.ServiceImpl;
 
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dimas.brosalin.DAO_VER_2_IMPL.TransactionDAOImpl_VER_2;
+import ru.dimas.brosalin.DAO_IMPL.TransactionDAOImpl_VER_2;
 import ru.dimas.brosalin.Models.Transaction;
 import ru.dimas.brosalin.Services.TransactionService;
 

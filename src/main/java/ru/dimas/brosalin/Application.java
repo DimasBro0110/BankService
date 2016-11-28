@@ -44,7 +44,9 @@ public class Application {
         UserServiceImpl userDAOImpl2 = (UserServiceImpl) context.getBean("userService");
 //        userDAOImpl2.saveEntity(user_1);
         Account accountTest = userDAOImpl2.getAccountByUserEmail("dima0294@yandex.ru");
+        Wallet wallet = userDAOImpl2.getWalletFromUserByPhoneNumber("+79851730921");
 
+        System.out.println(wallet);
         System.out.println(accountTest.toJson());
 
 //        Account account = (Account) context.getBean("accountModel");

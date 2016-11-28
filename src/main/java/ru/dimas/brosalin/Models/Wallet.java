@@ -30,7 +30,7 @@ public class Wallet implements Serializable {
     @Column(name = "BALANCE")
     private float walletBalance = 0.0f;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 

@@ -1,9 +1,10 @@
 package ru.dimas.brosalin.ServiceImpl;
 
 import org.springframework.transaction.annotation.Transactional;
-import ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2;
+import ru.dimas.brosalin.DAO_IMPL.UserDAOImpl_VER_2;
 import ru.dimas.brosalin.Models.Account;
 import ru.dimas.brosalin.Models.User;
+import ru.dimas.brosalin.Models.Wallet;
 import ru.dimas.brosalin.Services.UserService;
 
 /**
@@ -48,6 +49,13 @@ public class UserServiceImpl implements UserService {
         Account account = (Account) this.userDAOImpl2.getAccountFromUserByEmail(email);
         return account;
     }
+
+    @Override
+    public Wallet getWalletFromUserByPhoneNumber(String phone) {
+        Wallet wallet = (Wallet) this.userDAOImpl2.getWalletByPhoneNumber(phone);
+        return wallet;
+    }
+
 
     public void setUserDAOImpl2(UserDAOImpl_VER_2 userDAOImpl2) {
         this.userDAOImpl2 = userDAOImpl2;

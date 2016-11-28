@@ -26,12 +26,12 @@ public class Account implements Serializable {
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @OneToMany(
+    @OneToOne(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             mappedBy = "account"
     )
-    private Set<Wallet> wallet;
+    private Wallet wallet;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -89,11 +89,11 @@ public class Account implements Serializable {
         this.user = user;
     }
 
-    public Set<Wallet> getWallet() {
+    public Wallet getWallet() {
         return wallet;
     }
 
-    public void setWallet(Set<Wallet> wallet) {
+    public void setWallet(Wallet wallet) {
         this.wallet = wallet;
     }
 

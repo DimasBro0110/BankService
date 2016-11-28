@@ -1,12 +1,12 @@
-package ru.dimas.brosalin.DAO_VER_2_IMPL;
+package ru.dimas.brosalin.DAO_IMPL;
 
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-import ru.dimas.brosalin.DAO_VER_2.ModelDAOGlobal;
+import ru.dimas.brosalin.DAO.ModelDAOGlobal;
 import ru.dimas.brosalin.Models.Account;
 import ru.dimas.brosalin.Models.User;
+import ru.dimas.brosalin.Models.Wallet;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -49,7 +49,11 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         try {
             List<Account> accountByUserEmail = (ArrayList<Account>)getHibernateTemplate()
                     .find("select user.account from User user where user.email=?", email);
-            return accountByUserEmail.get(0);
+            if(accountByUserEmail.size() > 0) {
+                return accountByUserEmail.get(0);
+            }else{
+                return null;
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             return null;
@@ -73,6 +77,21 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
                     .find("from User u where u.userPhoneNumber=?", phoneNumber);
             return userListByPhone.get(0);
         }catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public Object getWalletByPhoneNumber(String phoneNumber){
+        try{
+            List<Wallet> walletListByPhone = (ArrayList<Wallet>)getHibernateTemplate()
+                    .find("select account.wallet from User u inner join u.account as account where u.userPhoneNumber=?", phoneNumber);
+            if(walletListByPhone.size() > 0) {
+                return walletListByPhone.get(0);
+            }else {
+                return null;
+            }
+        }catch (Exception ex){
             ex.printStackTrace();
             return null;
         }
