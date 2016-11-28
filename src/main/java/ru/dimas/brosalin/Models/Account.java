@@ -102,15 +102,20 @@ public class Account implements Serializable {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("ACCOUNT_ID", this.getAccountID());
         jsonObject.addProperty("CREATION", this.getAccountCreation().toString());
-        JsonArray walletArray = new JsonArray();
-        for(Wallet wall: wallet){
-            walletArray.add(wall.toJson());
-        }
-        JsonArray accTransactionsTo = new JsonArray();
-        for(Transaction transaction: accountTransactionsTo){
-            accTransactionsTo.add(transaction.toJson());
-        }
-        jsonObject.add("WALLET", walletArray);
+//        JsonArray walletArray = new JsonArray();
+//        if(wallet.size() > 0) {
+//            for (Wallet wall : wallet) {
+//                walletArray.add(wall.toJson());
+//            }
+//        }
+//        JsonArray accTransactionsTo = new JsonArray();
+//        if(accountTransactionsTo.size() > 0) {
+//            for (Transaction transaction : accountTransactionsTo) {
+//                accTransactionsTo.add(transaction.toJson());
+//            }
+//        }
+//        jsonObject.add("WALLET", walletArray);
+//        jsonObject.add("TRANSACTIONS_TO", accTransactionsTo);
         return jsonObject;
 
     }

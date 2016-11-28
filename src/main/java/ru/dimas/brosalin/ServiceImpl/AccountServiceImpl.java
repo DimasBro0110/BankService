@@ -19,6 +19,11 @@ public class AccountServiceImpl implements AccountService {
         this.accountDAOImplVer2.save(account);
     }
 
+    @Override
+    public void update(Account account) {
+        this.accountDAOImplVer2.update(account);
+    }
+
     public void setAccountDAOImplVer2(AccountDAOImpl_VER_2 accountDAOImplVer2) {
         this.accountDAOImplVer2 = accountDAOImplVer2;
     }

@@ -38,17 +38,21 @@ public class Application {
         user_1.setUserLastName("Brosalin");
         user_1.setEmail("dima0294@yandex.ru");
         user_1.setGender("m");
+        user_1.setUserPhoneNumber("+79851730921");
         user_1.setUserId(1);
 
         UserServiceImpl userDAOImpl2 = (UserServiceImpl) context.getBean("userService");
-        userDAOImpl2.saveEntity(user_1);
+//        userDAOImpl2.saveEntity(user_1);
+        Account accountTest = userDAOImpl2.getAccountByUserEmail("dima0294@yandex.ru");
 
-        Account account = (Account) context.getBean("accountModel");
-        account.setAccountCreation(new Timestamp(System.currentTimeMillis()));
-        account.setUser(user_1);
+        System.out.println(accountTest.toJson());
 
-        AccountServiceImpl accountService = (AccountServiceImpl) context.getBean("accountService");
-        accountService.saveEntity(account);
+//        Account account = (Account) context.getBean("accountModel");
+//        account.setAccountCreation(new Timestamp(System.currentTimeMillis()));
+//        account.setUser(user_1);
+//
+//        AccountServiceImpl accountService = (AccountServiceImpl) context.getBean("accountService");
+//        accountService.saveEntity(account);
 
     }
 

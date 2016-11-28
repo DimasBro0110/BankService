@@ -7,5 +7,6 @@ import ru.dimas.brosalin.Models.Account;
  */
 
 public interface AccountService {
-    public void saveEntity(Account account);
+    void saveEntity(Account account);
+    void update(Account account);
 }

@@ -26,6 +26,9 @@ public class User implements Serializable{
     @Column(name = "LAST_NAME")
     private String userLastName;
 
+    @Column(name = "PHONE_NUMBER")
+    private String userPhoneNumber;
+
     @Column(name = "PASSWORD")
     private String password;
 
@@ -49,7 +52,7 @@ public class User implements Serializable{
 
     public User(int i, String name, String lastname,
                 String pass, int age, String gender,
-                String mail)
+                String mail, String phoneNumber)
     {
 
         this.userId = i;
@@ -59,6 +62,7 @@ public class User implements Serializable{
         this.age = age;
         this.gender = gender;
         this.email = mail;
+        this.userPhoneNumber = phoneNumber;
 
     }
 
@@ -127,7 +131,8 @@ public class User implements Serializable{
                 + "\nAge:" + getAge()
                 + "\nGender:" + getGender()
                 + "\nEmail:" + getEmail()
-                + "\nPassword:" + getPassword();
+                + "\nPassword:" + getPassword()
+                + "\nPhoneNumber"+ getUserPhoneNumber();
 
     }
 
@@ -148,7 +153,16 @@ public class User implements Serializable{
         jsonObject.addProperty("Gender", this.getGender());
         jsonObject.addProperty("Age", this.getAge());
         jsonObject.addProperty("Email", this.getEmail());
+        jsonObject.addProperty("PhoneNumber", this.getUserPhoneNumber());
         return jsonObject;
 
+    }
+
+    public String getUserPhoneNumber() {
+        return userPhoneNumber;
+    }
+
+    public void setUserPhoneNumber(String userPhoneNumber) {
+        this.userPhoneNumber = userPhoneNumber;
     }
 }

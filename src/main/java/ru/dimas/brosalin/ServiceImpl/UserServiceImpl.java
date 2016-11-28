@@ -2,6 +2,7 @@ package ru.dimas.brosalin.ServiceImpl;
 
 import org.springframework.transaction.annotation.Transactional;
 import ru.dimas.brosalin.DAO_VER_2_IMPL.UserDAOImpl_VER_2;
+import ru.dimas.brosalin.Models.Account;
 import ru.dimas.brosalin.Models.User;
 import ru.dimas.brosalin.Services.UserService;
 
@@ -17,6 +18,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveEntity(User user) {
         this.userDAOImpl2.save(user);
+    }
+
+    @Override
+    public User getUserById(int id){
+        User user = (User)this.userDAOImpl2.getModelById(id);
+        return user;
+    }
+
+    @Override
+    public void update(User user){
+        this.userDAOImpl2.update(user);
+    }
+
+    @Override
+    public User getModelByNameAndLastName(String name, String lastName) {
+        User user = (User)this.userDAOImpl2.getModelByNameAndLastName(name, lastName);
+        return user;
+    }
+
+    @Override
+    public User getModelByEmail(String email) {
+        User user = (User) this.userDAOImpl2.getModelByEmail(email);
+        return user;
+    }
+
+    @Override
+    public Account getAccountByUserEmail(String email) {
+        Account account = (Account) this.userDAOImpl2.getAccountFromUserByEmail(email);
+        return account;
     }
 
     public void setUserDAOImpl2(UserDAOImpl_VER_2 userDAOImpl2) {
