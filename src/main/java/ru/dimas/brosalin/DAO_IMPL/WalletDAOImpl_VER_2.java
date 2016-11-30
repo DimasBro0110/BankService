@@ -23,7 +23,11 @@ public class WalletDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAO
         try {
             List<Wallet> walletList = (ArrayList<Wallet>)getHibernateTemplate()
                     .find("from Wallet wal where wal.id=?", id);
-            return walletList.get(0);
+            if(walletList != null) {
+                return walletList.get(0);
+            }else{
+                return null;
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             return null;
@@ -37,7 +41,11 @@ public class WalletDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAO
                             "wal.account acc join " +
                             "acc.user usr where " +
                             "usr.userPhoneNumber=?", phoneNumber);
-            return walletList.get(0);
+            if(walletList != null) {
+                return walletList.get(0);
+            }else{
+                return null;
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             return null;
@@ -51,7 +59,11 @@ public class WalletDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAO
                             "wal.account acc join " +
                             "acc.user usr where " +
                             "lower(usr.email)=?", email.toLowerCase());
-            return walletList.get(0);
+            if(walletList != null) {
+                return walletList.get(0);
+            }else{
+                return null;
+            }
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
@@ -67,11 +79,20 @@ public class WalletDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAO
                             "lower(usr.userFirstName)=? " +
                             "and lower(sr.userFirstName)=?",
                             firstName.toLowerCase(), lastName.toLowerCase());
-            return walletList.get(0);
+            if(walletList != null) {
+                return walletList.get(0);
+            }else{
+                return null;
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             return null;
         }
+    }
+
+    public boolean numberWalletExists(long number){
+        List result = getHibernateTemplate().find("from Wallet wal where wal.walletNumber=?", number);
+        return !result.isEmpty();
     }
 
     @Override

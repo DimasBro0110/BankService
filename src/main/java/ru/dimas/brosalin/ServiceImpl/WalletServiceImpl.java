@@ -42,6 +42,11 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    public boolean numberWalletExists(long number) {
+        return this.walletDAOImplVer2.numberWalletExists(number);
+    }
+
+    @Override
     public void update(Wallet wallet) {
         this.walletDAOImplVer2.update(wallet);
     }

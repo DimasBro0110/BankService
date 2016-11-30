@@ -18,8 +18,8 @@ public class SendMessageFromYandexAccount {
     private Session session;
 
     public SendMessageFromYandexAccount() {
-        emailService = "{$EMAIL}";
-        emailServicePassword = "{$PASSWORD}";
+        emailService = "brosalin.b@yandex.ru";
+        emailServicePassword = "justbank";
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.yandex.ru");
         props.put("mail.smtp.auth", "true");

@@ -75,6 +75,26 @@
         <property name="legsFromDAOImplVer2" ref="legsFromDAO"/>
     </bean>
 
+    <bean id="transferMoney" class="ru.dimas.brosalin.BusinessLogicBOImpl.TransferMoney">
+        <property name="accountService" ref="accountService"/>
+        <property name="legsFromService" ref="legsFromService"/>
+        <property name="legsToService" ref="legsToService"/>
+        <property name="transactionService" ref="transactionService"/>
+        <property name="walletService" ref="walletService"/>
+        <property name="legsFrom" ref="legsFromModel"/>
+        <property name="legsTo" ref="legsToModel"/>
+        <property name="transaction" ref="transactionModel"/>
+    </bean>
+
+    <bean id="userCreationInSystem" class="ru.dimas.brosalin.BusinessLogicBOImpl.UserCreationInSystem">
+        <property name="user" ref="userModel"/>
+        <property name="account" ref="accountModel"/>
+        <property name="wallet" ref="walletModel"/>
+        <property name="accountService" ref="accountService"/>
+        <property name="walletService" ref="walletService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
     <bean id="userModel" class="ru.dimas.brosalin.Models.User"/>
     <bean id="accountModel" class="ru.dimas.brosalin.Models.Account"/>
     <bean id="walletModel" class="ru.dimas.brosalin.Models.Wallet"/>

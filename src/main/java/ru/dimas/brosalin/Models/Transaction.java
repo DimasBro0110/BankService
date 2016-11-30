@@ -40,10 +40,6 @@ public class Transaction implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "transaction")
     private LegsTo legsTo;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "CURRENCY")
-    private Currency currency;
-
     public Transaction() {}
 
     public Transaction(long id, Timestamp time){
@@ -79,7 +75,6 @@ public class Transaction implements Serializable {
         jsonObject.add("ACCOUNT_FROM_INFO", this.getAccountFrom().toJson());
         jsonObject.add("LEGS_FROM_INFO", this.getLegsFrom().toJson());
         jsonObject.add("LEGS_FROM_TO", this.getLegsTo().toJson());
-        jsonObject.add("CURRENCY_INFO", this.getCurrency().toJson());
         return jsonObject;
 
     }
@@ -98,14 +93,6 @@ public class Transaction implements Serializable {
 
     public LegsTo getLegsTo() {
         return legsTo;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
     }
 
     public Account getAccountTo() {

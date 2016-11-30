@@ -11,5 +11,6 @@ public interface WalletService {
     Wallet getWalletByPhoneNumber(String phoneNumber);
     Wallet getWalletByEmail(String email);
     Wallet getWaleltByFirstNameAndLastName(String firstName, String lastName);
+    boolean numberWalletExists(long number);
     void update(Wallet wallet);
 }

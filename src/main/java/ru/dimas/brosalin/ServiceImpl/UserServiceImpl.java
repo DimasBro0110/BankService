@@ -47,6 +47,16 @@ public class UserServiceImpl implements UserService {
         return this.userDAOImpl2.getModelByPhoneNumber(phone);
     }
 
+    @Override
+    public boolean phoneUserExists(String phone) {
+        return this.userDAOImpl2.phoneUserExists(phone);
+    }
+
+    @Override
+    public boolean emailUserExists(String email) {
+        return this.userDAOImpl2.emailUserExists(email);
+    }
+
     public void setUserDAOImpl2(UserDAOImpl_VER_2 userDAOImpl2) {
         this.userDAOImpl2 = userDAOImpl2;
     }

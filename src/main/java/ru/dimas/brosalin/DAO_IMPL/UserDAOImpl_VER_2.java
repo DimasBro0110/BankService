@@ -67,6 +67,18 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         }
     }
 
+    public boolean emailUserExists(String email){
+        List userList = getHibernateTemplate()
+                .find("from User u where u.email=?", email);
+        return !userList.isEmpty();
+    }
+
+    public boolean phoneUserExists(String phone){
+        List userList = getHibernateTemplate()
+                .find("from User u where u.userPhoneNumber=?", phone);
+        return !userList.isEmpty();
+    }
+
     @Override
     public void update(Object object) {
         getHibernateTemplate().update(object);
