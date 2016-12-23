@@ -48,6 +48,13 @@ public class User implements Serializable{
     )
     private Account account;
 
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user"
+    )
+    private AdministrativeUser adminAccount;
+
     public User(){}
 
     public User(int i, String name, String lastname,
@@ -164,5 +171,13 @@ public class User implements Serializable{
 
     public void setUserPhoneNumber(String userPhoneNumber) {
         this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public AdministrativeUser getAdminAccount() {
+        return adminAccount;
+    }
+
+    public void setAdminAccount(AdministrativeUser adminAccount) {
+        this.adminAccount = adminAccount;
     }
 }

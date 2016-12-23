@@ -20,16 +20,16 @@ public class UserNotificationAspect {
         Object[] argumentsPassed = pjp.getArgs();
         if(argumentsPassed.length > 0){
             pjp.proceed();
-            System.out.println("Argument passed: ");
-            String stringRepresentation = argumentsPassed[0].toString();
-            for(String value: stringRepresentation.split("\n")){
-                if(value.contains("Email")){
-                    String email = value.split(":")[1];
-                    System.out.println(value.split(":")[1]);
-                    messageFromYandexAccount.setEmailCustomer(email);
-                    messageFromYandexAccount.sendNotifacationToCustomer("Welcome !!!", textToSend);
-                }
-            }
+//            System.out.println("Argument passed: ");
+//            String stringRepresentation = argumentsPassed[0].toString();
+//            for(String value: stringRepresentation.split("\n")){
+//                if(value.contains("Email")){
+//                    String email = value.split(":")[1];
+//                    System.out.println(value.split(":")[1]);
+//                    messageFromYandexAccount.setEmailCustomer(email);
+//                    messageFromYandexAccount.sendNotifacationToCustomer("Welcome !!!", textToSend);
+//                }
+//            }
         }else{
             //pjp.proceed();
             System.out.println("No arguments passed");

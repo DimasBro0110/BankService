@@ -27,12 +27,8 @@ public class UserCreationInSystem {
         try{
             boolean emailExists = userService.emailUserExists(user.getEmail());
             boolean phoneExists = userService.phoneUserExists(user.getUserPhoneNumber());
-            if(emailExists){
-                return 1; //email exists
-            }else if(phoneExists) {
-                return 2; //phone exists
-            }else if(emailExists && phoneExists){
-                return 3;
+            if(emailExists || phoneExists){
+                return 1; //email or phone exists exists
             }else {
                 long currentWalletNumber = generateNumberWallet();
                 while (walletService.numberWalletExists(currentWalletNumber)) {

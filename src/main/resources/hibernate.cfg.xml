@@ -21,5 +21,6 @@
         <mapping class="ru.dimas.brosalin.Models.Transaction"/>
         <mapping class="ru.dimas.brosalin.Models.LegsTo"/>
         <mapping class="ru.dimas.brosalin.Models.LegsFrom"/>
+        <mapping class="ru.dimas.brosalin.Models.AdministrativeUser"/>
     </session-factory>
 </hibernate-configuration>

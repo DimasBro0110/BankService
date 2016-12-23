@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -94,6 +101,36 @@
         <property name="walletService" ref="walletService"/>
         <property name="userService" ref="userService"/>
     </bean>
+
+    <bean id="phoneNotification" class="ru.dimas.brosalin.Notification.SendMessageByPhoneNumber">
+        <constructor-arg value="AC0890d1483d395bd41a9a2150421241ee"/>
+        <constructor-arg value="b44d4a7ef7ecbb905a97589016db6b94"/>
+        <constructor-arg value="+16699001417"/>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <property name="host" value=""/>
+        <property name="port" value="123"/>
+        <property name="username" value=""/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="messageListener" class="ru.dimas.brosalin.RabbitMQ.RabbitMQListener">
+        <property name="transferMoney" ref="transferMoney"/>
+        <property name="userCreationInSystem" ref="userCreationInSystem"/>
+        <property name="user" ref="userModel"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <rabbit:queue id="queueUserAdministration" exclusive="true" name="userTasks"/>
+    <rabbit:queue id="queueUserFinanceActions" exclusive="true" name="financeTasks"/>
+
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"/>
+
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener queues="queueUserAdministration" ref="messageListener" method="onMessage"/>
+        <rabbit:listener queues="queueUserFinanceActions" ref="messageListener" method="onMessage"/>
+    </rabbit:listener-container>
 
     <bean id="userModel" class="ru.dimas.brosalin.Models.User"/>
     <bean id="accountModel" class="ru.dimas.brosalin.Models.Account"/>

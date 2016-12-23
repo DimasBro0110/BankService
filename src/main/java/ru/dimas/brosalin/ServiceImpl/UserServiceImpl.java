@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
         return this.userDAOImpl2.emailUserExists(email);
     }
 
+    @Override
+    public int deleteUserByPhone(String phone) {
+        return this.userDAOImpl2.deleteModelByPhone(phone);
+    }
+
     public void setUserDAOImpl2(UserDAOImpl_VER_2 userDAOImpl2) {
         this.userDAOImpl2 = userDAOImpl2;
     }

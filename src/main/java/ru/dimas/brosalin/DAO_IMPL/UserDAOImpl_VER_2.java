@@ -33,6 +33,19 @@ public class UserDAOImpl_VER_2 extends HibernateDaoSupport implements ModelDAOGl
         }
     }
 
+    public int deleteModelByPhone(String phone){
+        try{
+            List<User> userList = (List<User>)getHibernateTemplate()
+                    .find("from User where userPhoneNumber=?", phone);
+            User usr = userList.get(0);
+            getHibernateTemplate().delete(usr);
+            return 0;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return -1;
+        }
+    }
+
     public User getModelByNameAndLastName(String name, String lastName){
         try {
             List<User> userListByNameAndLastName = (List<User>) getHibernateTemplate()

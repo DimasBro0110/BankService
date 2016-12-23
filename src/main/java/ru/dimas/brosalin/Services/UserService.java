@@ -18,4 +18,5 @@ public interface UserService {
     User getUserByPhone(String phone);
     boolean phoneUserExists(String phone);
     boolean emailUserExists(String email);
+    int deleteUserByPhone(String phone);
 }
